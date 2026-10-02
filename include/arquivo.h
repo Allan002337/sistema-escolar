@@ -1,20 +1,25 @@
-#ifndef ALUNO_H
-#define ALUNO_H
+#ifndef ARQUIVO_H
+#define ARQUIVO_H
 
-#define MAX_ALUNOS 100
-#define TAM_NOME   50
-#define TAM_CURSO  30
+#include "aluno.h"
+#include "disciplina.h"
+#include "matricula.h"
 
-typedef struct {
-    int  ra;
-    char nome[TAM_NOME];
-    char curso[TAM_CURSO];
-} Aluno;
+// Todas retornam 1 em sucesso e 0 se fopen/IO falhar.
 
-Aluno aluno_ler(void);                                       //pede os dados ao usuario 
-int   aluno_cadastrar(Aluno alunos[], int *qtd, Aluno novo); // 0 se cheio ou RA repetido 
-int   aluno_buscar(const Aluno alunos[], int qtd, int ra);   // indice ou -1 
-int   aluno_remover(Aluno alunos[], int *qtd, int ra);       // 0 se nao encontrou 
-void  aluno_listar(const Aluno alunos[], int qtd);
+// Texto 
+int arquivo_salvar_alunos_txt(const char *arq, const Aluno v[], int qtd);
+int arquivo_carregar_alunos_txt(const char *arq, Aluno v[], int max, int *qtd);
+int arquivo_salvar_disciplinas_txt(const char *arq, const Disciplina v[], int qtd);
+int arquivo_carregar_disciplinas_txt(const char *arq, Disciplina v[], int max, int *qtd);
+
+// Binario: carga e gravacao completas 
+int arquivo_salvar_matriculas_bin(const char *arq, const Matricula v[], int qtd);
+int arquivo_carregar_matriculas_bin(const char *arq, Matricula v[], int max, int *qtd);
+
+// Binario: acesso direto com fseek 
+int arquivo_ler_matricula_bin(const char *arq, int pos, Matricula *m);
+int arquivo_atualizar_matricula_bin(const char *arq, int pos, const Matricula *m);
+int arquivo_contar_matriculas_bin(const char *arq);   
 
 #endif
