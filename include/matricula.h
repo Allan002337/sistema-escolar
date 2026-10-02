@@ -1,19 +1,23 @@
-#ifndef DISCIPLINA_H
-#define DISCIPLINA_H
+#ifndef MATRICULA_H
+#define MATRICULA_H
 
-#define MAX_DISC      30
-#define TAM_NOME_DISC 40
+#define MAX_MATRICULAS 500
+#define NUM_AVALIACOES 6  //definir o valor final do grupo 
 
 typedef struct {
-    int  codigo;
-    char nome[TAM_NOME_DISC];
-    int  creditos;
-    int  cargaHoraria;
-} Disciplina;
+    int   raAluno;
+    int   codDisciplina;
+    int   semestre;                  
+    float notas[NUM_AVALIACOES];
+    int   notasLancadas;             // 0 = so matriculado, 1 = notas lancadas 
+} Matricula;
 
-Disciplina disciplina_ler(void);
-int  disciplina_cadastrar(Disciplina disc[], int *qtd, Disciplina nova); // 0 se cheio ou codigo repetido 
-int  disciplina_buscar(const Disciplina disc[], int qtd, int codigo);    // indice ou -1 
-void disciplina_listar(const Disciplina disc[], int qtd);
+// 0 se cheio ou se o aluno ja estiver na disciplina neste semestre 
+int  matricula_efetuar(Matricula m[], int *qtd, int raAluno, int codDisciplina, int semestre);
+// indice ou -1 
+int  matricula_buscar(const Matricula m[], int qtd, int raAluno, int codDisciplina, int semestre);
+// pede as notas (0 a 10) da matricula m[idx]; 0 se idx invalido 
+int  matricula_lancar_notas(Matricula m[], int qtd, int idx);
+void matricula_listar_aluno(const Matricula m[], int qtd, int raAluno);
 
 #endif
