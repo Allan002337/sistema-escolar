@@ -53,3 +53,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+build/
+sistema
+sistema.exe
+*.o
+data/*.bin
+data/boletim_*.txt
