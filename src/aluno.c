@@ -27,12 +27,12 @@ Aluno aluno_ler(const ListaAlunos *l)
     {
         novo.ra = lerInteiro("Digite o RA do aluno: ", RA_MIN, RA_MAX); // Limita o RA entre 1 e 99999
 
-        if (aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADO)
+        if (aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADA) // Verifica se o RA já existe
             printf("RA ja cadastrado. Tente novamente.\n");
         else
             break;
 
-    } while (1); // Verifica se o RA já existe
+    } while (1); 
 
     do 
     {
@@ -52,9 +52,9 @@ Aluno aluno_ler(const ListaAlunos *l)
 int   aluno_cadastrar(ListaAlunos *l, Aluno novo)
 {
     // Verifica se o RA já existe
-    if(aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADO)
+    if(aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADA)
     {
-        return ALUNO_ERRO_REPETIDO; // RA repetido
+        return ALUNO_ERRO_REPETIDA; // RA repetido
     }
 
     if(l->qtd >= l->capacidade)
@@ -81,13 +81,13 @@ int   aluno_buscar(const ListaAlunos *l, int ra)
         if (l->dados[i].ra == ra)
             return i;
     }
-    return ALUNO_INDICE_NAO_ENCONTRADO; // não encontrado
+    return ALUNO_INDICE_NAO_ENCONTRADA; // não encontrado
 }
 
 int   aluno_remover(ListaAlunos *l, int ra)
 {
     int index = aluno_buscar(l, ra);
-    if (index == ALUNO_INDICE_NAO_ENCONTRADO)
+    if (index == ALUNO_INDICE_NAO_ENCONTRADA)
     {
         return ALUNO_ERRO_NAO_ACHOU; // não encontrou
     }
@@ -100,6 +100,7 @@ int   aluno_remover(ListaAlunos *l, int ra)
 
     return ALUNO_OK; 
 }      
+
 void  aluno_listar(const ListaAlunos *l)
 {
     if (l->qtd == 0)
