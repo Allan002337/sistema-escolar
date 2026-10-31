@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,7 +39,7 @@ Aluno aluno_ler(const ListaAlunos *l)
     {
         lerString("Digite o nome do aluno: ", novo.nome, TAM_NOME); // Usa a função lerString para ler o nome
     }
-    while (strlen(novo.nome) == 0);
+    while (strlen(novo.nome) == 0 && isblank(novo.nome[0]) && printf("Nome invalido. Tente novamente.\n")); // Garante que o nome não seja vazio ou apenas espaços
 
     do 
     {
