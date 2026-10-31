@@ -19,10 +19,20 @@ void aluno_lista_liberar(ListaAlunos *l)
     l->capacidade = 0;
 }
 
-Aluno aluno_ler(void)
+Aluno aluno_ler(const ListaAlunos *l)
 {
     Aluno novo;
-    novo.ra = lerInteiro("Digite o RA do aluno: ", RA_MIN, RA_MAX); // Limita o RA entre 1 e 99999
+
+    do
+    {
+        novo.ra = lerInteiro("Digite o RA do aluno: ", RA_MIN, RA_MAX); // Limita o RA entre 1 e 99999
+
+        if (aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADO)
+            printf("RA ja cadastrado. Tente novamente.\n");
+        else
+            break;
+
+    } while (1); // Verifica se o RA já existe
 
     do 
     {
@@ -30,7 +40,11 @@ Aluno aluno_ler(void)
     }
     while (strlen(novo.nome) == 0);
 
-    lerString("Digite o curso do aluno: ", novo.curso, TAM_CURSO); // Usa a função lerString para ler o curso
+    do 
+    {
+        lerString("Digite o curso do aluno: ", novo.curso, TAM_CURSO); // Usa a função lerString para ler o curso
+    }
+    while (strlen(novo.curso) == 0);
 
     return novo;
 }
@@ -38,7 +52,7 @@ Aluno aluno_ler(void)
 int   aluno_cadastrar(ListaAlunos *l, Aluno novo)
 {
     // Verifica se o RA já existe
-    if(aluno_buscar(l, novo.ra) != ALUNO_ERRO_NAO_ACHOU)
+    if(aluno_buscar(l, novo.ra) != ALUNO_INDICE_NAO_ENCONTRADO)
     {
         return ALUNO_ERRO_REPETIDO; // RA repetido
     }
@@ -57,7 +71,7 @@ int   aluno_cadastrar(ListaAlunos *l, Aluno novo)
 
     l->dados[l->qtd] = novo;
     l->qtd++;
-    return 0; // sucesso
+    return ALUNO_OK; // sucesso
 }
 
 int   aluno_buscar(const ListaAlunos *l, int ra)
@@ -67,13 +81,13 @@ int   aluno_buscar(const ListaAlunos *l, int ra)
         if (l->dados[i].ra == ra)
             return i;
     }
-    return ALUNO_ERRO_NAO_ACHOU; // não encontrado
+    return ALUNO_INDICE_NAO_ENCONTRADO; // não encontrado
 }
 
 int   aluno_remover(ListaAlunos *l, int ra)
 {
     int index = aluno_buscar(l, ra);
-    if (index == ALUNO_ERRO_NAO_ACHOU)
+    if (index == ALUNO_INDICE_NAO_ENCONTRADO)
     {
         return ALUNO_ERRO_NAO_ACHOU; // não encontrou
     }
