@@ -169,21 +169,21 @@ int matricula_remover_por_aluno(ListaMatriculas *l, int raAluno, int *removidas)
 
     *removidas = 0;
 
-    for (int i = 0; i < l->qtd; i++)
+    int esc = 0;
+    int qtdAntiga = l->qtd; 
+
+    for (int le = 0; le < qtdAntiga; le++)
     {
-        if (l->dados[i].raAluno == raAluno)
+        if (l->dados[le].raAluno != raAluno)
         {
-            for (int j = i; j < l->qtd - 1; j++)
-            {
-                l->dados[j] = l->dados[j + 1];
-            }
-            l->qtd--;
-            (*removidas)++;
-            i--; // Ajusta o índice para verificar a nova matrícula na posição atual
+            l->dados[esc] = l->dados[le];
+            esc++;
         }
-        
     }
+
+    l->qtd = esc;
+
+    *removidas = qtdAntiga - esc;
 
     return MATRICULA_OK;
 }
-
