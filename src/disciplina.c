@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,7 +39,7 @@ Disciplina disciplina_ler(const ListaDisciplinas *l)
     {
         lerString("Informe o nome da disciplina: ", disc.nome, TAM_NOME_DISC);
     }
-    while (strlen(disc.nome) == 0);
+    while (strlen(disc.nome) == 0 && isblank(disc.nome[0]) && printf("Nome invalido. Tente novamente.\n")); // Garante que o nome não seja vazio ou apenas espaços
 
     disc.creditos = lerInteiro("Informe os creditos da disciplina: ", 1, 10);
 
