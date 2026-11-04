@@ -3,14 +3,14 @@
 
 #define TAM_NOME   50
 #define TAM_CURSO  30
-#define RA_MIN     1
-#define RA_MAX     99999
+#define RA_MIN     100000
+#define RA_MAX     999999
 
 #define ALUNO_OK              0
-#define ALUNO_ERRO_REPETIDA   1
+#define ALUNO_ERRO_REPETIDO   1
 #define ALUNO_ERRO_MEMORIA    2
 #define ALUNO_ERRO_NAO_ACHOU   3
-#define ALUNO_INDICE_NAO_ENCONTRADA  -1
+#define ALUNO_INDICE_NAO_ENCONTRADO  -1
 
 typedef struct {
     int  ra;
