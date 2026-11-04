@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>  
+#include <ctype.h>
 #include "utils.h"
 
 static void encerrarPorEOF(void)
@@ -36,9 +37,11 @@ int lerInteiro(const char *msg, int min, int max)
             printf("Informe um valor valido\n");
         else if (inteiro > max || inteiro < min)
             printf("Numero precisa estar entre %d e %d\n", min, max);
+        else if (isalpha(inteiro))
+            printf("Informe um valor valido\n");
         
         limparBuffer();
-    } while (valid != 1 || inteiro > max || inteiro < min);
+    } while (valid != 1 || inteiro > max || inteiro < min || isalpha(inteiro));
 
     return inteiro;
     
@@ -61,9 +64,12 @@ float lerFloat(const char *msg, float min, float max)
             printf("Informe um valor valido\n");
         else if (number > max || number < min)
             printf("Numero precisa estar entre %.2f e %.2f\n", min, max);
+        else if (isalpha(number))
+            printf("Informe um valor valido\n");
+
         
         limparBuffer();
-    } while (valid != 1 || number > max || number < min);
+    } while (valid != 1 || number > max || number < min || isalpha(number));
 
     return number;
 }
