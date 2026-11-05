@@ -26,7 +26,7 @@ Disciplina disciplina_ler(const ListaDisciplinas *l)
 
     do
     {
-        disc.codigo = lerInteiro("Informe o codigo da disciplina: ", 1, 9999);
+        disc.codigo = lerInteiro("Informe o codigo da disciplina: ", 1000, 9999);
 
         if (disciplina_buscar(l, disc.codigo) != DISCIPLINA_NAO_ENCONTRADA) // Verifica se o código já existe
             printf("Codigo ja cadastrado. Tente novamente.\n");
