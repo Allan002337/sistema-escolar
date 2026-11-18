@@ -1,5 +1,0 @@
-308726;Allan Jonson;Sistemas de Informacao
-308723;Henry Mandu;Sistemas de Informacao
-308729;Pedro Cruz;Sistemas de Informacao
-308627;Joao Pinto;Sistemas de Informacao
-320192;Pedrinho;Telecom
